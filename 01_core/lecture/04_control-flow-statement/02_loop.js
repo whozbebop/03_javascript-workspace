@@ -100,3 +100,17 @@ const fruit = "strawberry";
 for (let i = 0; i < fruit.length; i++) {
   console.log(fruit.charAt(i));
 }
+
+for (let r = 1; r <= 4; r++) {
+  let stars = "";
+  for (let c = 1; c <= r; c++) {
+    stars += "*";
+  }
+  console.log(stars);
+}
+
+let nn = 5;
+while (nn > 0) {
+  console.log(nn);
+  nn--;
+}

@@ -21,7 +21,7 @@ const grade = 0 ?? 50; // 0
 
 // 사용자 입력값(선택사항) 기록
 //const input = "" || "hello";
-const input = "" ?? "hello"; // null, undefined
+const input = "" ?? "hello"; // ""
 console.log(input);
 
 // 2. 옵셔널 체이닝 연산자
