@@ -150,5 +150,5 @@ delete movie.showTm;
 
 //for (프로퍼티명(key)를 담을 변수 ) in
 for (const key in movie) {
-  console.log(movie[key]);
+  console.log(movie);
 }
