@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <label for="username">유저명</label
+    ><input type="text" id="username" value="user01" />
+
+    <script>
+      const attributes = document.getElementById("username").attributes;
+      // NodeNameMap 객체 반환
+      console.log(attributes);
+      // 어트리뷰트 값 취득
+      //console.log(attributes.type.value);
+      //console.log(attributes.id.value);
+      //console.log(attributes.value.value);
+
+      const $input = document.getElementById("username");
+      // value 어트리뷰트 값 취득
+      const inputValue = $input.getAttribute("value");
+      console.log(inputValue);
+      // value 어트리뷰트 값 변경
+      $input.setAttribute("value", "user02");
+    </script>
+
+    <label for="nickname">닉네임</label>
+    <input type="text" id="nickname" name="nickname" value="JSMaster" />
+
+    <script>
+      const $nickname = document.getElementById("nickname");
+      // name 어트리뷰트를 가지고 있는지 확인
+      console.log($nickname.hasAttribute("name"));
+      // value 어트리뷰트를 가지고 있는지 확인
+      if ($nickname.hasAttribute("value")) {
+        // value 어트리뷰트가 있으면 삭제
+        $nickname.removeAttribute("value");
+      }
+      // value 어트리뷰트를 가지고 있는지 확인
+      console.log($nickname.hasAttribute("value"));
+    </script>
+  </body>
+</html>
