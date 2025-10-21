@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+    📌 키보드 관련 이벤트 
+    1. 키보드의 키가 눌려질때 또는 떼어질때 발생되는 이벤트
+    2. 이벤트 종류
+      1) keypress : 키가 눌려질때 발생되는 이벤트 (펑션키, 기능키, 한글키를 제외한 키를 감지함)
+      2) keydown  : 키가 눌려질때 발생되는 이벤트 (모든 키를 감지함)
+      3) keyup    : 키가 떼어질때 발생되는 이벤트 (모든 키를 감지함)
+    3. 이벤트 객체 주요 속성
+      1) key     : 눌려진 문자
+      2) keyCode : 물리적인 키 코드 
+  -->
+    <h2>키보드 관련 이벤트</h2>
+
+    <input id="content" type="text" placeholder="아무 키나 입력하세요" />
+
+    <div id="result" style="background: lightgray; width: 300px">&nbsp;</div>
+
+    <script>
+      document.querySelector("#content").addEventListener("keypress", (e) => {
+        //console.log(`${e.key}, ${e.keyCode}`);
+        // 사용자가 입력하고 엔터키를 눌렀을 때 사용자 입력값 가져와서 결과 영역에 출력
+        if (e.key == "Enter") {
+          document.querySelector("#result").innerText = e.target.value;
+          e.target.value = "";
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -14,10 +14,7 @@
         <input type="text" name="mobile" id="mobile" class="inp">
           → Attribute 총 4개 : type, name, id, class
       3) 속성 제어하기 
-        (1) 속성값 가
-        
-        
-        져오기 : Element.prototype.getAttribute(attribute)
+        (1) 속성값 가져오기 : Element.prototype.getAttribute(attribute)
         (2) 속성값 수정하기 : Element.prototype.setAttribute(attribute, value)
         (3) 속성 삭제하기 : Element.prototype.removeAttribute(attribute)
         (4) 속성 존재 여부 확인하기 : Element.prototype.hasAttribute(attribute)
@@ -59,7 +56,29 @@
     <button onclick="checkAndControlAttribute();">속성 확인 및 조작</button>
 
     <script>
-      function checkAndControlAttribute() {}
+      function checkAndControlAttribute() {
+        const $image = document.querySelector("#img-container > img");
+
+        // HTML Attribute
+        /*
+      console.log($image.getAttribute("src"));
+      console.log($image.getAttribute("width"));
+      console.log($image.getAttribute("height"));
+      console.log($image.getAttribute("alt")); // null
+      $image.setAttribute("src", "../../assets/images/city2.jpg");
+      $image.setAttribute("width", "300px");
+      */
+
+        // DOM Property
+        console.dir($image); // directory 구조 확인
+        console.log($image.src);
+        console.log($image.width);
+        console.log($image["height"]);
+
+        $image.width = 200;
+        //$image.height = "500px"; // dom property로는 number 타입이므로
+        $image.height = 500;
+      }
     </script>
 
     <hr />
@@ -76,13 +95,30 @@
   -->
     <h2>content 관련 속성</h2>
 
-    <div id="area1"><b>안녕하세요</b></div>
-    <div id="area2"><b>안녕하세요</b></div>
+    <div id="area1">
+      <b>안녕하세요</b>
+    </div>
+
+    <div id="area2">
+      <b>안녕하세요</b>
+    </div>
 
     <button onclick="contentTest();">content 제어</button>
 
     <script>
-      function contentTest() {}
+      function contentTest() {
+        // innerText property : 선택된 요소의 내부 텍스트 속성
+        const $area1 = document.querySelector("#area1");
+        console.log($area1);
+        console.log($area1.innerText); // b 태그 제외한 텍스트값만 가져와짐
+        $area1.innerText = "innerText로 조작";
+        $area1.innerText = "<h4>태그반영되나?</h4>"; // 마크업 취급하지 않음 => 그냥 문자열(텍스트)로 취급
+
+        // innerHTML property : 선택된 요소의 내부 마크업(요소) 속성
+        const $area2 = document.querySelector("#area2");
+        console.log($area2.innerHTML); // 마크업 포함
+        $area2.innerHTML = "<h4>태그반영되나?</h4>"; // 마크업 취급해서 => 태그로 반영됨
+      }
     </script>
 
     <!-- 
@@ -95,7 +131,11 @@
 
     <button onclick="XSSTest();">XSS 테스트</button>
     <script>
-      function XSSTest() {}
+      function XSSTest() {
+        document.querySelector(
+          "#XSS-test"
+        ).innerHTML = `<img src="x" onerror="alert('메롱메롱~~');">`;
+      }
     </script>
 
     <hr />
@@ -128,7 +168,15 @@
     <button onclick="checkedTest();">checked 관련 속성</button>
 
     <script>
-      function checkedTest() {}
+      function checkedTest() {
+        // property로 조작
+        document.querySelector("#sports").checked = true;
+        document.querySelector("#study").checked = false;
+
+        // attribute로 조작
+        document.querySelector("#cook").setAttribute("checked", "checked");
+        document.querySelector("#cook").removeAttribute("checked");
+      }
     </script>
 
     <hr />
@@ -152,7 +200,16 @@
     <button onclick="styleTest();">style 관련 속성</button>
 
     <script>
-      function styleTest() {}
+      function styleTest() {
+        const $box = document.querySelector("#box");
+
+        console.log($box.getAttribute("style")); // style attribute
+        console.log($box.style); // style property => {스타일속성:값, 스타일속성:값}
+
+        $box.style.width = "100px";
+        $box.style.backgroundColor = "red";
+        $box.style.border = "3px dashed pink";
+      }
     </script>
 
     <h3>연습</h3>
@@ -168,7 +225,16 @@
     <button onclick="practice();">실습</button>
 
     <script>
-      function practice() {}
+      function practice() {
+        // 1. li 요소들의 문구들 일괄적으로 "안녕하세요"로 변경
+        // 2. li 요소들의 배경색을 일괄적으로 "red"로 변경
+        const list = document.querySelectorAll("#list>li"); // NodeList [li, li, ..]
+
+        list.forEach((li, idx) => {
+          li.innerText = "안녕하세요" + (idx + 1);
+          li.style.backgroundColor = "red";
+        });
+      }
     </script>
 
     <hr />
@@ -204,7 +270,30 @@
     <button onclick="classTest();">class 관련 속성</button>
 
     <script>
-      function classTest() {}
+      function classTest() {
+        const $area = document.querySelector(".area");
+        console.log($area.className);
+
+        // circle 클래스 추가
+        //$area.className = "circle"; // 덮어씌워지므로 area 사라짐
+
+        console.log($area.classList); // DOMTokenList [클래스, 클래스, ..]
+
+        // DOMTokenList에서 제공하는 메소드
+        // 1) add(...className) : class속성값 추가
+        $area.classList.add("circle");
+        $area.classList.add("lightgray");
+
+        // 2) contains(className) : 해당 class가 존재하는 여부 확인
+        console.log($area.classList.contains("lightgray"));
+        console.log($area.classList.contains("yellow"));
+
+        // 3) remove(className) : 해당 class 제거
+        $area.classList.remove("circle");
+
+        // 4) toggle(className) : class 속성값 추가 및 제거
+        $area.classList.toggle("yellow");
+      }
     </script>
 
     <hr />
@@ -250,31 +339,30 @@
 
     <script>
       function valueTest() {
-        //사용자가 입력한 이름값, 선택한 거주지, 체크한 관심분야의 value들 가져오기
-        const $nameInput = document.querySelector("#username");
-        const $addrSelect = document.querySelector("#addr");
+        // 사용자가 입력한 이름값, 선택한 거주지, 체크한 관심분야의 value들 가져오기
+        const $nameInput = document.querySelector("#username"); // <input>
+        const $addrSelect = document.querySelector("#addr"); // <select>
         const $interestCheck = document.querySelectorAll(
-          '#input[name="interest"]:checked'
-        ); // NodeList [input]
+          "input[name='interest']:checked"
+        ); // NodeList [input, input]
         // ["HTML", "CSS"]
-
-        // checked 상태의 체크박스 요소들의 value 수집
-        const interest = [...$interestCheck] // 이게 뭐지
+        // checked상태의 체크박스 요소들의 value 수집
+        const interest = [...$interestCheck]
           .map((checkedBox) => checkedBox.value)
           .join(", ");
-        //console.log(interest);
 
         document.querySelector("#result").innerHTML = `
         <ul>
           <li>이름: ${$nameInput.value}</li>
-          <li></li>
-          <li></li>
+          <li>거주지: ${$addrSelect.value}</li>
+          <li>관심분야: ${interest || "없음"}</li>
         </ul>
-        `;
+      `;
 
         // 값 초기화
         $nameInput.value = "";
-        $addrSelect.vaue = "서울";
+        $addrSelect.value = "서울";
+        // 모든 체크박스 요소 순회하면서 checked property = false 대입
       }
     </script>
 
@@ -309,7 +397,7 @@
         console.log($person1.dataset.homeAddress);
 
         const $person2 = document.querySelector("#person2");
-        $person2.dataset.mobile = "010-1234-1234";
+        $person2.dataset.mobile = "010-2222-3333";
         $person2.dataset.dayOfBirth = "1985-09-18";
         console.log($person2);
       }

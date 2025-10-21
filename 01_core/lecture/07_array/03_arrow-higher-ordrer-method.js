@@ -95,6 +95,8 @@ const newMonths = months.map((item) => {
   return item + "월";
 });
 
+console.log(newMonths);
+
 months
   .map((item) => {
     return item + "월";
