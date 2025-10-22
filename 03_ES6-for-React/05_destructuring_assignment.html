@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      {
+        // * 배열 구조분해할당
+
+        const fruits = ["apple", "banana", "kiwi"];
+        //const a = fruits[0]
+        //const [a, , c] = fruits;
+        //console.log(a, c);
+
+        const vehicles = ["mustang", "f-150", "expedition"];
+        //const [car, , suv] = vehicles; // 일부 요소 생각 가
+        //const [sportstcar, ...cars] = vehicles;
+        //console.log(sportstcar, cars);
+
+        // 함수에서 다수의 데이터 반환
+        function calc(a, b) {
+          const add = a + b;
+          const subtract = a - b;
+          const multiply = a * b;
+          const divide = a / b;
+
+          return [add, subtract, multiply, divide];
+        }
+        const [add, sub, mul, div] = calc(4, 7);
+        //console.log(add, sub, mul, div);
+
+        // * 객체{} 구조분해할당
+        const car = {
+          maker: "bmw",
+          model: "X3",
+          year: 2025,
+        };
+
+        /* => 구조분해할당 X
+        const ma = car.maker;
+        */
+
+        const { model, maker, year } = car;
+        //console.log(model, maker, year);
+
+        const qna = {
+          q: "한국의 수도는?",
+          a: "서울",
+        };
+
+        const { q: question, a: answer } = qna; // 변수명을 속성명이 아닌 다름이름으로 담고자 할 때
+        //console.log(question, answer);
+
+        // function myCarInfo(mycar) {
+        //   const message = `My Car is ${mycar.maker} ${mycar.model}`;
+        // }
+
+        // myCarInfo(car);
+
+        function myCarInfo({ mycar, model }) {
+          //const { maker, model } = mycar;
+          const message = `My Car is ${maker} ${model}`;
+          console.log(message);
+        }
+
+        myCarInfo(car);
+      }
+    </script>
+  </body>
+</html>

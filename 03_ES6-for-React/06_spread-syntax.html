@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      {
+        // * 배열에서의 전개 구문
+        const nums = [1, 2, 3, 4, 5];
+        console.log(...nums);
+
+        const newNums = [...nums, 6, 7];
+        //consolog.log(nums, newNums);
+
+        // 배열 병합
+        const arr1 = [1, 2, 3];
+        const arr2 = [4, 5, 6];
+        const newAr = [...arr1, ...arr2];
+      }
+      {
+        //* 객체에서의 전개구문
+        const user = {
+          name: "홍길동",
+          age: 20,
+          address: "서울시 강ㄴ",
+        };
+        //const newUser = //{...user}
+
+        const newUser = {
+          ...user,
+          dream: "프엔 개발자",
+          hobby: "프로그래밍",
+        };
+        console.log(newUser);
+
+        const myVehicle = {
+          brand: "ford",
+          model: "Mustang",
+          ClipboardItem,
+        };
+        const updateVehicle = {
+          type: "car",
+          color: "yellow",
+        };
+
+        const myUpdateVehicle = {
+          ...myVehicle,
+          ...updateVehicle,
+        };
+
+        // 이거 왜 안될까?
+        console.log(myUpdateVehicle);
+
+        const car = {
+          brand: "BMW",
+          model: "X3", // ['model']
+          color: "black",
+        };
+
+        const newCar = {
+          ...car,
+          model: "",
+        };
+      }
+    </script>
+  </body>
+</html>
